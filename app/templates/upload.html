@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+
+{% block title %}代码上传{% endblock %}
+
+{% block rightbox %}
+  <form method="post" enctype="multipart/form-data">
+    <input type="file" name="codeZip">
+    <input type="submit" value="上传">
+  </form>
+{% endblock %}

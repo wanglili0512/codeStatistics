@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block title %}用户代码详情{% endblock %}
+
+{% block rightbox %}
+  <p style="padding-bottom: 20px;">用户提交代码详情</p>
+  <table border="1" style="margin: 0 auto">
+    <thead>
+      <tr>
+        <th>编号</th>
+        <th>行数</th>
+        <th>时间</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for detail in detail_list %}
+      <tr>
+        <th>{{ detail.id }}</th>
+        <th>{{ detail.line }}</th>
+        <th>{{ detail.ctime }}</th>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

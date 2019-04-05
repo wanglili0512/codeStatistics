@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block title %}用户列表{% endblock %}
+
+{% block rightbox %}
+  <p style="padding-bottom: 20px;">用户列表</p>
+  <table border="1" style="margin: 0 auto">
+    <thead>
+      <tr>
+        <th>编号</th>
+        <th>用户名</th>
+        <th>查看</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in user_list %}
+      <tr>
+        <th>{{ user.id }}</th>
+        <th>{{ user.name }}</th>
+        <th><a href="/detail/{{ user.id }}">查看</a></th>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}
