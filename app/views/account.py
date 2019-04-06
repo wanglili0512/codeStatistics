@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, session, redirect
 
 from app.utils.md5 import md5
+from app.utils import sqlhelper
 
 
 acc_bp = Blueprint('acc_bp', __name__)
@@ -17,23 +18,10 @@ def login():
     password = request.form.get('pwd')
 
     # 连接数据库，查询用户是否存在
-    import pymysql
-    config = {
-        'host': '127.0.0.1',
-        'port': 3306,
-        'user': 'root',
-        'password': '',
-        'db': 'wll',
-        'charset': 'utf8'
-    }
-    conn = pymysql.connect(**config)
-    cur = conn.cursor(pymysql.cursors.DictCursor)
     sql = 'select id,name from users where name=%s and password=%s'
-    cur.execute(sql, [name, md5(password)])
-    user_obj = cur.fetchone()
-    cur.close()
-    conn.close()
+    user_obj = sqlhelper.fetch_one(sql, [name, md5(password)])
 
+    print(user_obj)
     # 用户不存在，则重新登录
     if not user_obj:
         return render_template('login.html', error='用户名密码错误')
